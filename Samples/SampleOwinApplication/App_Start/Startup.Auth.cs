@@ -55,26 +55,27 @@ namespace SampleOwinApplication
                 SPOptions = spOptions
             };
 
-            var idp = new IdentityProvider(new EntityId("https://sts.windows.net/e1413b17-c8b7-4388-99f0-2f613124050c/"), spOptions)
-                {
-                    AllowUnsolicitedAuthnResponse = true,
-                    Binding = Saml2BindingType.HttpRedirect,
-                    SingleSignOnServiceUrl = new Uri("https://login.microsoftonline.com/e1413b17-c8b7-4388-99f0-2f613124050c/saml2")
+            //var idp = new IdentityProvider(new EntityId("https://sts.windows.net/e1413b17-c8b7-4388-99f0-2f613124050c/"), spOptions)
+            //    {
+            //        AllowUnsolicitedAuthnResponse = true,
+            //        Binding = Saml2BindingType.HttpRedirect,
+            //        SingleSignOnServiceUrl = new Uri("https://login.microsoftonline.com/e1413b17-c8b7-4388-99f0-2f613124050c/saml2")
                   
-                };
+            //    };
 
-            idp.SigningKeys.AddConfiguredKey(
-                new X509Certificate2(
-                    HostingEnvironment.MapPath(
-                        "~/App_Data/SAMLThing.cer")));
+            //idp.SigningKeys.AddConfiguredKey(
+            //    new X509Certificate2(
+            //        HostingEnvironment.MapPath(
+            //            "~/App_Data/SAMLThing.cer")));
 
-            Saml2Options.IdentityProviders.Add(idp);
+            //Saml2Options.IdentityProviders.Add(idp);
 
             // It's enough to just create the federation and associate it
             // with the options. The federation will load the metadata and
             // update the options with any identity providers found.
 
-           new Federation("https://login.microsoftonline.com/e1413b17-c8b7-4388-99f0-2f613124050c/federationmetadata/2007-06/federationmetadata.xml?appid=6d137192-dc97-42d0-a651-ce32b2804c33", true, Saml2Options);
+//            new Federation("https://login.microsoftonline.com/e1413b17-c8b7-4388-99f0-2f613124050c/federationmetadata/2007-06/federationmetadata.xml?appid=6d137192-dc97-42d0-a651-ce32b2804c33", true, Saml2Options);
+            new Federation(@"C:\Users\shabenschuss\Documents\Source\Saml2Test\Samples\SampleOwinApplication\odx_fedmyohio_idp_federation_metadata.xml", true, Saml2Options);
 
             return Saml2Options;
         }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<EntitiesDescriptor Name="https://dx-dev.myohio.gov/fedmyohio/sps/fedmyohio/saml20"
+    xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
+    xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+    xmlns:shibmd="urn:mace:shibboleth:metadata:1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" entityID="https://dx-dev.myohio.gov/fedmyohio/sps/fedmyohio/saml20">
+    <md:IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+      <md:KeyDescriptor use="signing">
+        <KeyInfo xmlns="http://www.w3.org/2000/09/xmldsig#">
+          <X509Data>
+            <X509Certificate>MIIDGDCCAgCgAwIBAgIIehQAV8F6TDwwDQYJKoZIhvcNAQELBQAwKjELMAkGA1UEBhMCdXMxDDAKBgNVBAoTA2libTENMAsGA1UEAxMEaXNhbTAeFw0xNzA3MDYxNDMxNTBaFw0yNzA3MDUxNDMxNTBaMCoxCzAJBgNVBAYTAnVzMQwwCgYDVQQKEwNpYm0xDTALBgNVBAMTBGlzYW0wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDLSjz7hEnT6AYm/mfo89yBsDXQMJOI+AFdLfcRrvWG8NdC7VqJSa/9M5KwQXf//J2R4p9MIHELtMwJPSF16pjnEMEprkSNYSR8TZkTHL/EN/k8yJYYmvHHOKnXjUS8GuZrhslqmeXto4d4ZjAJZ4WeJ+6ntsf2vExh/Y20THYv5Pp9rIaq2qdtx8HGyx8fux6AyVi3zRm8Rv2YHh8eLviyED6vmLj/v2lwWcCMr5UIRGUDx7GZnwdWJK7f5Mm4ahrPWmSnx50i1T50xAgfNu20LqFQfIylMwYUGVICQvzZGoSPtu+JkAoE3P7UxiSFHhvj9KGfzYWrxnXXYfhvncz/AgMBAAGjQjBAMB0GA1UdDgQWBBS5Z5SXPOGGQ3EhY5llMW5qE5sY7jAfBgNVHSMEGDAWgBS5Z5SXPOGGQ3EhY5llMW5qE5sY7jANBgkqhkiG9w0BAQsFAAOCAQEAcJfxv8ZbpWl/NuE8XRZgLtWCPI5M62G9K0ze7C+g9OJ8D+WnB5qm7YjO2jiPonkZg89mfj7wG2YnqW022y4RLySuXh7ie67ZBoYVJeocHZ+TEJ3j0xck0UkkH2p6nn7sgGdeLmCwlTrBdJL9IkRGPCrXoIuKywpjii/kXBPVI0R100zeRk23p3PKT5ARnRiMBWDywBDVSlDzVlltQ1OpYb2PAMcyYC+WwhpJMJ53eIhzf4jmGfB10uX/B2DwR3erHv2gKKYSpjWY6n47mY6f5FzNNICabczEAh/OUYrjWonVokJcWpikql9/YefS3JPS5bdvCizzZZ6dUQqCpm9APA==</X509Certificate>
+          </X509Data>
+        </KeyInfo>
+      </md:KeyDescriptor>
+      <md:KeyDescriptor use="encryption">
+        <KeyInfo xmlns="http://www.w3.org/2000/09/xmldsig#">
+          <X509Data>
+            <X509Certificate>MIIDGDCCAgCgAwIBAgIIehQAV8F6TDwwDQYJKoZIhvcNAQELBQAwKjELMAkGA1UEBhMCdXMxDDAKBgNVBAoTA2libTENMAsGA1UEAxMEaXNhbTAeFw0xNzA3MDYxNDMxNTBaFw0yNzA3MDUxNDMxNTBaMCoxCzAJBgNVBAYTAnVzMQwwCgYDVQQKEwNpYm0xDTALBgNVBAMTBGlzYW0wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDLSjz7hEnT6AYm/mfo89yBsDXQMJOI+AFdLfcRrvWG8NdC7VqJSa/9M5KwQXf//J2R4p9MIHELtMwJPSF16pjnEMEprkSNYSR8TZkTHL/EN/k8yJYYmvHHOKnXjUS8GuZrhslqmeXto4d4ZjAJZ4WeJ+6ntsf2vExh/Y20THYv5Pp9rIaq2qdtx8HGyx8fux6AyVi3zRm8Rv2YHh8eLviyED6vmLj/v2lwWcCMr5UIRGUDx7GZnwdWJK7f5Mm4ahrPWmSnx50i1T50xAgfNu20LqFQfIylMwYUGVICQvzZGoSPtu+JkAoE3P7UxiSFHhvj9KGfzYWrxnXXYfhvncz/AgMBAAGjQjBAMB0GA1UdDgQWBBS5Z5SXPOGGQ3EhY5llMW5qE5sY7jAfBgNVHSMEGDAWgBS5Z5SXPOGGQ3EhY5llMW5qE5sY7jANBgkqhkiG9w0BAQsFAAOCAQEAcJfxv8ZbpWl/NuE8XRZgLtWCPI5M62G9K0ze7C+g9OJ8D+WnB5qm7YjO2jiPonkZg89mfj7wG2YnqW022y4RLySuXh7ie67ZBoYVJeocHZ+TEJ3j0xck0UkkH2p6nn7sgGdeLmCwlTrBdJL9IkRGPCrXoIuKywpjii/kXBPVI0R100zeRk23p3PKT5ARnRiMBWDywBDVSlDzVlltQ1OpYb2PAMcyYC+WwhpJMJ53eIhzf4jmGfB10uX/B2DwR3erHv2gKKYSpjWY6n47mY6f5FzNNICabczEAh/OUYrjWonVokJcWpikql9/YefS3JPS5bdvCizzZZ6dUQqCpm9APA==</X509Certificate>
+          </X509Data>
+        </KeyInfo>
+        <md:EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5"/>
+      </md:KeyDescriptor>
+      <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://dx-dev.myohio.gov/fedmyohio/sps/fedmyohio/saml20/slo"/>
+      <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://dx-dev.myohio.gov/fedmyohio/sps/fedmyohio/saml20/slo"/>
+      <md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</md:NameIDFormat>
+      <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</md:NameIDFormat>
+      <md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</md:NameIDFormat>
+      <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat>
+      <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://dx-dev.myohio.gov/fedmyohio/sps/fedmyohio/saml20/login"/>
+      <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://dx-dev.myohio.gov/fedmyohio/sps/fedmyohio/saml20/login"/>
+    </md:IDPSSODescriptor>
+    <md:Organization>
+      <md:OrganizationName xml:lang="en">fedmyohio</md:OrganizationName>
+      <md:OrganizationDisplayName xml:lang="en">fedmyohio</md:OrganizationDisplayName>
+      <md:OrganizationURL xml:lang="en"/>
+    </md:Organization>
+  </md:EntityDescriptor>
+</EntitiesDescriptor>
