@@ -55,42 +55,45 @@ namespace SampleOwinApplication
                 SPOptions = spOptions
             };
 
-            var idp = new IdentityProvider(new EntityId("https://stubidp.sustainsys.com/Metadata"), spOptions)
+            var idp = new IdentityProvider(new EntityId("https://sts.windows.net/e1413b17-c8b7-4388-99f0-2f613124050c/"), spOptions)
                 {
                     AllowUnsolicitedAuthnResponse = true,
                     Binding = Saml2BindingType.HttpRedirect,
-                    SingleSignOnServiceUrl = new Uri("https://stubidp.sustainsys.com")
+                    SingleSignOnServiceUrl = new Uri("https://login.microsoftonline.com/e1413b17-c8b7-4388-99f0-2f613124050c/saml2")
+                  
                 };
 
             idp.SigningKeys.AddConfiguredKey(
                 new X509Certificate2(
                     HostingEnvironment.MapPath(
-                        "~/App_Data/stubidp.sustainsys.com.cer")));
+                        "~/App_Data/SAMLThing.cer")));
 
             Saml2Options.IdentityProviders.Add(idp);
 
             // It's enough to just create the federation and associate it
             // with the options. The federation will load the metadata and
             // update the options with any identity providers found.
-            new Federation("http://localhost:52071/Federation", true, Saml2Options);
+
+           new Federation("https://login.microsoftonline.com/e1413b17-c8b7-4388-99f0-2f613124050c/federationmetadata/2007-06/federationmetadata.xml?appid=6d137192-dc97-42d0-a651-ce32b2804c33", true, Saml2Options);
 
             return Saml2Options;
         }
 
         private static SPOptions CreateSPOptions()
         {
-            var swedish = "sv-se";
+            var english = "en-us";
 
             var organization = new Organization();
-            organization.Names.Add(new LocalizedName("Sustainsys", swedish));
-            organization.DisplayNames.Add(new LocalizedName("Sustainsys AB", swedish));
-            organization.Urls.Add(new LocalizedUri(new Uri("http://www.Sustainsys.se"), swedish));
+            organization.Names.Add(new LocalizedName("OhioPublicDefender", english));
+            organization.DisplayNames.Add(new LocalizedName("OhioPublicDefender", english));
+            organization.Urls.Add(new LocalizedUri(new Uri("http://online.opd.ohio.gov"), english));
 
             var spOptions = new SPOptions
             {
+                 
                 EntityId = new EntityId("http://localhost:57294/Saml2"),
-                ReturnUrl = new Uri("http://localhost:57294/Account/ExternalLoginCallback"),
-                DiscoveryServiceUrl = new Uri("http://localhost:52071/DiscoveryService"),
+                ReturnUrl = new Uri("https://localhost:44332/Account/ExternalLoginCallback"),
+             //   DiscoveryServiceUrl = new Uri("http://localhost:52071/DiscoveryService"),
                 Organization = organization
             };
 
