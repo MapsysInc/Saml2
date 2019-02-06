@@ -11,12 +11,13 @@ using Sustainsys.Saml2.Owin;
 using Sustainsys.Saml2.WebSso;
 using System;
 using System.Globalization;
+using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using System.Web.Hosting;
 
 namespace SampleOwinApplication
 {
-	public partial class Startup
+    public partial class Startup
     {
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
@@ -49,10 +50,11 @@ namespace SampleOwinApplication
 
         private static Saml2AuthenticationOptions CreateSaml2Options()
         {
-            var spOptions = CreateSPOptions();
-            var Saml2Options = new Saml2AuthenticationOptions(false)
+            SPOptions spOptions = CreateSPOptions();
+            Saml2AuthenticationOptions Saml2Options = new Saml2AuthenticationOptions(false)
             {
-                SPOptions = spOptions
+                SPOptions = spOptions,
+
             };
 
             //var idp = new IdentityProvider(new EntityId("https://sts.windows.net/e1413b17-c8b7-4388-99f0-2f613124050c/"), spOptions)
@@ -60,7 +62,7 @@ namespace SampleOwinApplication
             //        AllowUnsolicitedAuthnResponse = true,
             //        Binding = Saml2BindingType.HttpRedirect,
             //        SingleSignOnServiceUrl = new Uri("https://login.microsoftonline.com/e1413b17-c8b7-4388-99f0-2f613124050c/saml2")
-                  
+
             //    };
 
             //idp.SigningKeys.AddConfiguredKey(
@@ -74,56 +76,56 @@ namespace SampleOwinApplication
             // with the options. The federation will load the metadata and
             // update the options with any identity providers found.
 
-//            new Federation("https://login.microsoftonline.com/e1413b17-c8b7-4388-99f0-2f613124050c/federationmetadata/2007-06/federationmetadata.xml?appid=6d137192-dc97-42d0-a651-ce32b2804c33", true, Saml2Options);
-            new Federation(@"C:\Users\shabenschuss\Documents\Source\Saml2Test\Samples\SampleOwinApplication\odx_fedmyohio_idp_federation_metadata.xml", true, Saml2Options);
-
+            //            new Federation("https://login.microsoftonline.com/e1413b17-c8b7-4388-99f0-2f613124050c/federationmetadata/2007-06/federationmetadata.xml?appid=6d137192-dc97-42d0-a651-ce32b2804c33", true, Saml2Options);
+            new Federation(@"~/odx_fedmyohio_idp_federation_metadata.xml", true, Saml2Options);
             return Saml2Options;
         }
 
         private static SPOptions CreateSPOptions()
         {
-            var english = "en-us";
+            string english = "en-us";
 
-            var organization = new Organization();
+            Organization organization = new Organization();
             organization.Names.Add(new LocalizedName("OhioPublicDefender", english));
             organization.DisplayNames.Add(new LocalizedName("OhioPublicDefender", english));
             organization.Urls.Add(new LocalizedUri(new Uri("http://online.opd.ohio.gov"), english));
 
-            var spOptions = new SPOptions
+            SPOptions spOptions = new SPOptions
             {
-                 
+
                 EntityId = new EntityId("http://localhost:57294/Saml2"),
                 ReturnUrl = new Uri("https://localhost:44332/Account/ExternalLoginCallback"),
-             //   DiscoveryServiceUrl = new Uri("http://localhost:52071/DiscoveryService"),
-                Organization = organization
+                //   DiscoveryServiceUrl = new Uri("http://localhost:52071/DiscoveryService"),
+                Organization = organization,
+                NameIdPolicy = new Sustainsys.Saml2.Saml2P.Saml2NameIdPolicy(true, Sustainsys.Saml2.Saml2P.NameIdFormat.EmailAddress)
             };
 
-            var techContact = new ContactPerson
+            ContactPerson techContact = new ContactPerson
             {
                 Type = ContactType.Technical
             };
             techContact.EmailAddresses.Add("Saml2@example.com");
             spOptions.Contacts.Add(techContact);
 
-            var supportContact = new ContactPerson
+            ContactPerson supportContact = new ContactPerson
             {
                 Type = ContactType.Support
             };
             supportContact.EmailAddresses.Add("support@example.com");
             spOptions.Contacts.Add(supportContact);
 
-            var attributeConsumingService = new AttributeConsumingService
+            AttributeConsumingService attributeConsumingService = new AttributeConsumingService
             {
                 IsDefault = true,
-				ServiceNames = { new LocalizedName("Saml2", "en") }
-			};
+                ServiceNames = { new LocalizedName("Saml2", "en") }
+            };
 
             attributeConsumingService.RequestedAttributes.Add(
-                new RequestedAttribute("urn:someName")
+                new RequestedAttribute("email")
                 {
-                    FriendlyName = "Some Name",
+                    FriendlyName = "email",
                     IsRequired = true,
-                    NameFormat = RequestedAttribute.AttributeNameFormatUri
+                    NameFormat = RequestedAttribute.AttributeNameFormatUnspecified
                 });
 
             attributeConsumingService.RequestedAttributes.Add(
@@ -131,9 +133,12 @@ namespace SampleOwinApplication
 
             spOptions.AttributeConsumingServices.Add(attributeConsumingService);
 
+
             spOptions.ServiceCertificates.Add(new X509Certificate2(
                 AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "/App_Data/Sustainsys.Saml2.Tests.pfx"));
 
+
+            spOptions.MinIncomingSigningAlgorithm = "http://www.w3.org/2000/09/xmldsig#rsa-sha1";
             return spOptions;
         }
     }
